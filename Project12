@@ -1,0 +1,41 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('./world_internet_user.csv', index_col = 0)
+
+df.groupby('Country').mean()
+df.groupby('Country').get_group('Croatia')
+df.groupby('Country').size()
+
+df
+
+East_Asia_df = df.loc[['Mongolia', 'Korea, North', 'Taiwan', 'Korea, South', 'Japan', 'China']]
+East_Asia_df
+
+flg=plt.figure(figsize=(10.4))
+ax = flg.add_subplot(111)
+
+ax.plot(East_Asia_df.index, East_Asia_df['Population'], label='Population')
+ax.plot(East_Asia_df.index, East_Asia_df['Internet_Users'], label='Internet_Users')
+
+ax.set_title('Comparison of Population and Internet_Users')
+ax.set_ylabel('Population')
+ax.set_xlabel('Internet_Users')
+
+ax.legend()
+plt.show()
+
+Northern_Europe_df = df.loc[['Iceland', 'Norway', 'Finland', 'Denmark', 'Sweden']]
+Northern_Europe_df
+
+xs=Northern_Europe_df.index.to_list()
+ys=Northern_Europe_df['Population'].to_list()
+
+plt.figure(figsize=(10, 6))
+plt.xlabel('Northern_Europe')
+plt.ylabel('Population')
+
+plt.bar(xs, ys, width=1, color='grey')
+
+plt.show()
